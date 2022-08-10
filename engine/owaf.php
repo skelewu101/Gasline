@@ -44,14 +44,13 @@ function get_web_page($url)
 
 function get_ver($page)
 {
-
-    if (str_contains($page, '<td class="lgnBL">') !== false || str_contains($page, 'Copyright (c) 2006 Microsoft Corporation') !== false || str_contains($page, '<td class="lgnBM">') !== false || str_contains($page, 'background-color:#0072C6') !== false)
-    {
-        return 'old exchange';
-    }
-    elseif (str_contains($page, '<div class="sidebar">') !== false || str_contains($page, 'Copyright (c) 2011 Microsoft Corporation') !== false || str_contains($page, 'Default to mouse class') !== false || str_contains($page, '@font-face') !== false) 
+    if (str_contains($page, '<div class="sidebar">') !== false || str_contains($page, 'Copyright (c) 2011 Microsoft Corporation') !== false || str_contains($page, 'Default to mouse class') !== false || str_contains($page, '@font-face') !== false) 
     {
         return 'new exchange';
+    }
+    elseif (str_contains($page, '<td class="lgnBL">') !== false || str_contains($page, 'Copyright (c) 2006 Microsoft Corporation') !== false || str_contains($page, '<td class="lgnBM">') !== false || str_contains($page, 'background-color:#0072C6') !== false)
+    {
+        return 'old exchange';
     }
     elseif (preg_grep('/^Copyright \(c\) ([0-9]{4}) Microsoft Corporation/', array(
         $page
