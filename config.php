@@ -10,5 +10,13 @@ $playsound = 1;
 $sound = 'https://teams.microsoft.com/'; 
 $Res2File = true;
 $ResFileName = base64_decode('Li4vUmVzdWx0LnR4dA==');
-$redirect = 'https://teams.microsoft.com/'; 
+$redirect = 'https://teams.microsoft.com/';
+
+
+//Multi = 		0
+//Office = 		1
+//Blue Owa = 	2
+//Yellow Owa = 	3
+//General = 	4
+$page = 0;
 ?>

